@@ -3,6 +3,7 @@ FROM debian:unstable
 
 ENV USER_NAME="opencode"
 ENV DEBIAN_FRONTEND="noninteractive"
+ENV OPENCODE_EXPERIMENTAL_FILEWATCHER=1
 
 RUN <<_EOF_
 apt-get update
