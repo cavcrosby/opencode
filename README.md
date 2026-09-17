@@ -22,7 +22,17 @@ temp_dir_path="$(mktemp --directory)"
 printf "\nOpenCode's scratch directory: %s\n" "${temp_dir_path}"
 sleep 5
 
+# with a global configuration file
 msb run --tty --net-default "deny" --net-rule "allow@public:tcp:443" --net-rule "allow@private:tcp:443" --net-rule "allow@dns" --net-rule "allow@192.168.0.0/16" --mount-file "${HOME}/.config/opencode/opencode.json:/home/opencode/.config/opencode/opencode.json" --mount-dir "${temp_dir_path}:/mnt" --memory "2G" "cavcrosby/opencode:latest"
+```
+
+```shell
+temp_dir_path="$(mktemp --directory)"
+printf "\nOpenCode's scratch directory: %s\n" "${temp_dir_path}"
+sleep 5
+
+# with global and custom configuration files
+msb run --tty --net-default "deny" --net-rule "allow@public:tcp:443" --net-rule "allow@private:tcp:443" --net-rule "allow@dns" --net-rule "allow@192.168.0.0/16" --mount-file "${HOME}/.config/opencode/opencode.json:/home/opencode/.config/opencode/opencode.json" --mount-file "${HOME}/.config/opencode/opencode.json.local:/home/opencode/.config/opencode/opencode.json.local" --mount-dir "${temp_dir_path}:/mnt" --memory "2G" --env "OPENCODE_CONFIG=/home/opencode/.config/opencode/opencode.json.local" "cavcrosby/opencode:latest"
 ```
 
 ## License
