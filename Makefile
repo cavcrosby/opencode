@@ -45,7 +45,11 @@ ${SETUP}:
 
 .PHONY: ${IMAGE}
 ${IMAGE}:
->	${DOCKER} build --tag "cavcrosby/opencode:latest" "${CURDIR}"
+>	${DOCKER} build \
+		--tag "cavcrosby/opencode:latest" \
+		--file "./src/Dockerfile" \
+		"${CURDIR}/src"
+
 >	${DOCKER} save "cavcrosby/opencode:latest" | ${MSB} load
 
 .PHONY: ${CLEAN}
